@@ -2,6 +2,11 @@ import mongoose from "mongoose";
 
 const itinerarySchema = new mongoose.Schema(
   {
+    // userId: {
+    //       type: mongoose.Schema.Types.ObjectId,
+    //       ref: "User",
+    //       required: true,
+    //     },
     extractedData: {
       type: Object,
       required: true,
