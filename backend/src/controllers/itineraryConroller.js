@@ -9,6 +9,7 @@ export const createItinerary = async (req, res) => {
     const aiResult = await generateItinerary(extractedData);
 
     const saved = await Itinerary.create({
+      // userId: req.user._id,
       extractedData,
       aiOutput: aiResult,
     });
@@ -41,6 +42,26 @@ export const getItinerary = async (req, res) => {
     res.json({
       success: true,
       data,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
+};
+
+
+// getall itenararies
+
+export const getAllItineraries = async (req, res) => {
+  try {
+    const itineraries = await Itinerary.find().sort({ createdAt: -1 });
+
+    res.status(200).json({
+      success: true,
+      count: itineraries.length,
+      data: itineraries,
     });
   } catch (err) {
     res.status(500).json({
